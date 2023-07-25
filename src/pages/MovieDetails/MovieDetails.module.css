@@ -1,0 +1,8 @@
+.poster {
+    display: flex;
+    gap: 30px;
+    padding: 20px;
+}
+.cerror{
+    font-size: 30px;
+}

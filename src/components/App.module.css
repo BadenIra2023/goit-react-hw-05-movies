@@ -1,0 +1,11 @@
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 30px;
+    border-bottom: 1px solid black;
+}
+.navLink{
+        padding: 8px 20px;
+        font-weight: 500;
+        font-size: 25px;
+}
