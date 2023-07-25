@@ -54,7 +54,7 @@ export const MovieDetails = () => {
     };
     }  
     getFilmDetails();
-     }, [params.imageId]);
+     }, [params]);
   
   
   return (
