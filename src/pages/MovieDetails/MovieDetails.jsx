@@ -20,7 +20,7 @@ export const MovieDetails = () => {
   const [release, setRelease] = useState("")
   const [average, setAverage] = useState(0)
   const [isLoading, setIsLoading] = useState(false);
-  const [filmId, setFilmId]= useState("")
+/*  const [filmId, setFilmId]= useState("") */
   const location = useLocation();
   
   const backLinkHome = useRef(location.state?.from ?? '/');
@@ -34,7 +34,7 @@ export const MovieDetails = () => {
     try {
       const response = await fetchFilmDetails(params.imageId)
    /*   setGetFilm(response) */
-      setFilmId(params.imageId)
+    /*   setFilmId(params.imageId) */
       console.log(response)
       setPoster(response.poster_path)
       setTitle(response.original_title)
