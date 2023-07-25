@@ -2,20 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { fetchFilmCast } from "../api";
 import css from "../Cast/Cast.module.css"
 import { Loader } from 'components/Loader/Loader';
+import { useParams } from 'react-router-dom';
 
 
-export const Cast = (idkey) => {
-
+export const Cast = () => {
+ 
   const [filmCast, setFilmCast] = useState({});
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  
+  const { imageId } = useParams();
+  console.log(imageId)
   useEffect(() => {
+    if (!imageId) return;
     const fetchCastData = async () => {
       
       try {
         setIsLoading(true);
-        const filmCastData = await fetchFilmCast(idkey.filmId);
+        const filmCastData = await fetchFilmCast(imageId);
         
         setFilmCast(filmCastData);
       } catch (error) {
@@ -28,7 +31,7 @@ export const Cast = (idkey) => {
     };
    
     fetchCastData();
-  }, [idkey]);
+  }, [imageId]);
   
 if (filmCast.length >0)  { 
   return (

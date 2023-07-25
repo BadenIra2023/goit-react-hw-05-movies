@@ -87,10 +87,10 @@ export const MovieDetails = () => {
        <li><Link to="cast"> Cast </Link> </li>
        <li><Link to="reviews">   Reviews</Link> </li>
       </ul>
-      <Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
        <Routes>
-          <Route path="cast" element={<Cast filmId={filmId} />} />
-          <Route path="reviews" element={<Reviews filmId={filmId}/>} />
+          <Route path="cast" element={<Cast />} />
+          <Route path="reviews" element={<Reviews />} />
         </Routes>
       </Suspense>
       </div>

@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { fetchFilmReview } from "../api";
 import { Loader } from "components/Loader/Loader";
-import css from "../Reviews/Reviews.module.css"
+import css from "../Reviews/Reviews.module.css";
+import { useParams } from 'react-router-dom';
 
-export const Reviews = (idkey) => {
+export const Reviews = () => {
   const [reviews, setReviews] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
+  const { imageId } = useParams();
   useEffect(() => {
+     if (!imageId) return;
     const fetchData = async () => {
      try {
         setIsLoading(true);
-    const reviewsData = await fetchFilmReview(idkey.filmId);
+    const reviewsData = await fetchFilmReview(imageId);
     setReviews(reviewsData);
       }
    catch (error) {
@@ -24,7 +26,7 @@ export const Reviews = (idkey) => {
     };
 
     fetchData();
-  }, [idkey]);
+  }, [imageId]);
 
   if (reviews && reviews.length > 0) {
     return (
