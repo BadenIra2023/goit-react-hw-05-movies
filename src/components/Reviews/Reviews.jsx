@@ -29,6 +29,11 @@ export const Reviews = (idkey) => {
   if (reviews && reviews.length > 0) {
     return (
       <div>
+        {error !== null && (
+        <p className="cerror">
+          Oops, some error occured. Please, try again later. Error: {error}
+        </p>
+      )}
          {isLoading && <Loader />}
         <ul className={css.reviews}>
         {reviews.map(review => {

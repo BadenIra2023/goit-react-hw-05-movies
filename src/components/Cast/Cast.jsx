@@ -1,24 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { fetchFilmCast } from "../api";
 import css from "../Cast/Cast.module.css"
+import { Loader } from 'components/Loader/Loader';
 
 
 export const Cast = (idkey) => {
 
   const [filmCast, setFilmCast] = useState({});
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   
   useEffect(() => {
     const fetchCastData = async () => {
       
       try {
-        
+        setIsLoading(true);
         const filmCastData = await fetchFilmCast(idkey.filmId);
         
         setFilmCast(filmCastData);
       } catch (error) {
         setError(error);
+        console.log(error)
       } 
+      finally {
+        setIsLoading(false);
+      }
     };
    
     fetchCastData();
@@ -26,7 +32,14 @@ export const Cast = (idkey) => {
   
 if (filmCast.length >0)  { 
   return (
-    <div >
+    <div > 
+      {error !== null && (
+        <p className="c-error">
+          Oops, some error occured. Please, try again later. Error: {error}
+        </p>
+      )}
+      {isLoading && <Loader />}
+
       <ul className={css.cast}>
       {filmCast.map(cast => {
           const { profile_path, name, character, id } = cast;

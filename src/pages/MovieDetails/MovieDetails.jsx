@@ -12,7 +12,7 @@ const Reviews = lazy(() => import("../../components/Reviews/Reviews"));
 
 export const MovieDetails = () => {
   const params = useParams()
-  const [getFilm, setGetFilm] = useState()
+/*  const [getFilm, setGetFilm] = useState() */
   const [poster, setPoster] = useState("")
   const [title, setTitle] = useState("")
   const [overview, setOverview] = useState("")
@@ -33,7 +33,7 @@ export const MovieDetails = () => {
      setIsLoading(true);
     try {
       const response = await fetchFilmDetails(params.imageId)
-      setGetFilm(response)
+   /*   setGetFilm(response) */
       setFilmId(params.imageId)
       console.log(response)
       setPoster(response.poster_path)
@@ -54,7 +54,7 @@ export const MovieDetails = () => {
     };
     }  
     getFilmDetails();
-     }, []);
+     }, [params.imageId]);
   
   
   return (
