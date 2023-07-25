@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/936.20662fe2.chunk.css","mappings":"AAAA,sBACI,cACJ,CACA,oBACA,cACA","sources":["pages/Home/Home.module.css"],"sourcesContent":[".filmname{\n    font-size: 20px;\n}\n.cerror{\nfont-size: 25px;\n}"],"names":[],"sourceRoot":""}
