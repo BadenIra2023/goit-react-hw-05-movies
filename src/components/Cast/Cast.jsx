@@ -7,14 +7,14 @@ export const Cast = (idkey) => {
 
   const [filmCast, setFilmCast] = useState({});
   const [error, setError] = useState(null);
-  console.log(idkey.filmId)
+  
   useEffect(() => {
     const fetchCastData = async () => {
-       console.log(idkey)
+      
       try {
         
         const filmCastData = await fetchFilmCast(idkey.filmId);
-        console.log(filmCastData);
+        
         setFilmCast(filmCastData);
       } catch (error) {
         setError(error);

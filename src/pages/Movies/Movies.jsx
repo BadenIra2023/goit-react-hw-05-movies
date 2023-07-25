@@ -12,8 +12,7 @@ export const Movies = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [getquerys, setGetQuerys] = useState([]);
   const location = useLocation();  
-  console.log(searchTerm)
-
+  
   useEffect(() => {
    if (!searchTerm) {return}
     const SearchForm = async () => {
@@ -22,8 +21,6 @@ export const Movies = () => {
       const response = await fetchFilmQuery(searchTerm)
       setGetQuerys(response)
       
-      console.log(response) 
-      console.log(getquerys)
       }
     catch (error) {
     setError(error.message);
@@ -77,10 +74,7 @@ return (
           ))}
         </ul>
       )}
-
-
-
-  </div>
+ </div>
     )
    }
 

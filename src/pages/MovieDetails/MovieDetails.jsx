@@ -1,18 +1,17 @@
 import { useParams, useLocation } from "react-router-dom";
-import { useEffect, useState, useRef, lazy } from "react";
+import { useEffect, useState, useRef, lazy, Suspense } from "react";
 import { fetchFilmDetails } from "../../components/api";
 import Notiflix from 'notiflix'; 
 import { Loader } from "../../components/Loader/Loader";
 import css from "./MovieDetails.module.css";
 import { Link, Routes, Route } from "react-router-dom";
-import {Cast} from "../../components/Cast/Cast";
-import {Reviews} from "../../components/Reviews/Reviews";
 
-/*const Cast = lazy(() => import("../../components/Cast/Cast"));
-const Reviews = lazy(() => import("../../components/Reviews/Reviews")); */
+
+const Cast = lazy(() => import("../../components/Cast/Cast"));
+const Reviews = lazy(() => import("../../components/Reviews/Reviews")); 
 
 export const MovieDetails = () => {
-    const params = useParams()
+  const params = useParams()
   const [getFilm, setGetFilm] = useState()
   const [poster, setPoster] = useState("")
   const [title, setTitle] = useState("")
@@ -21,13 +20,12 @@ export const MovieDetails = () => {
   const [release, setRelease] = useState("")
   const [average, setAverage] = useState(0)
   const [isLoading, setIsLoading] = useState(false);
- const [filmId, setFilmId]= useState("")
+  const [filmId, setFilmId]= useState("")
   const location = useLocation();
-  const backLinkHref = useRef(location.state?.from ?? '/');
-
-
-    console.log(params.imageId)
-    const [error, setError] = useState(null);
+  
+  const backLinkHome = useRef(location.state?.from ?? '/');
+  
+  const [error, setError] = useState(null);
  
      useEffect(() => {
     const getFilmDetails = async () => {
@@ -57,14 +55,14 @@ export const MovieDetails = () => {
     }  
     getFilmDetails();
      }, []);
-  /* if (getFilm === undefined) {return} */
-  console.log(filmId)
+  
+  
   return (
     <div>
         <div className={css.poster}> 
            
         <div >
-            <button to={backLinkHref.current}>Go back</button>
+            <Link className={css.buton} to={backLinkHome.current}>Go back</Link>
             {error !== null && (
         <p className={css.cerror}>
           Oops, some error occured. Please, try again later. Error: {error}
@@ -89,10 +87,12 @@ export const MovieDetails = () => {
        <li><Link to="cast"> Cast </Link> </li>
        <li><Link to="reviews">   Reviews</Link> </li>
       </ul>
+      <Suspense>
        <Routes>
           <Route path="cast" element={<Cast filmId={filmId} />} />
           <Route path="reviews" element={<Reviews filmId={filmId}/>} />
         </Routes>
+      </Suspense>
       </div>
     )
 } 

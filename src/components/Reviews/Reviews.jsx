@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { fetchFilmReview } from "../api";
+import { Loader } from "components/Loader/Loader";
 import css from "../Reviews/Reviews.module.css"
 
 export const Reviews = (idkey) => {
   const [reviews, setReviews] = useState(null);
-  console.log(idkey.filmId)
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
-      const reviewsData = await fetchFilmReview(idkey.filmId);
-
-      setReviews(reviewsData);
-      console.log(reviewsData);
+     try {
+        setIsLoading(true);
+    const reviewsData = await fetchFilmReview(idkey.filmId);
+    setReviews(reviewsData);
+      }
+   catch (error) {
+       setError(error);
+       console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     fetchData();
@@ -19,6 +29,7 @@ export const Reviews = (idkey) => {
   if (reviews && reviews.length > 0) {
     return (
       <div>
+         {isLoading && <Loader />}
         <ul className={css.reviews}>
         {reviews.map(review => {
           const { author, content, id } = review;
@@ -33,7 +44,7 @@ export const Reviews = (idkey) => {
       </div>
     );
   }
-  else { return <div>OOOpsssss</div>   }
+  else { return <div>Oops, some error occured. Please, try again later. Error: {error}</div>   }
 };
 
 export default Reviews;
